@@ -27,11 +27,11 @@ public class TheLittleBrotherNPC : MonoBehaviour
         Debug.Log($"NPC is performing: {routineName}");
 
         if (routineName == "Walk") DoMorningTask();
-        else if (routineName == "Afternoon Work") DoAfternoonTask();
+        else if (routineName == "Talk") DoAfternoonTask();
         else if (routineName == "Evening Relax") DoEveningTask();
     }
 
     void DoMorningTask() { NPCMovement.enabled = true; }
-    void DoAfternoonTask() { Debug.Log("NPC starts afternoon routine!"); }
+    void DoAfternoonTask() { DialogueController.instance.NewDialogueInstance("Random Text..."); }
     void DoEveningTask() { Debug.Log("NPC is relaxing for the evening."); }
 }
