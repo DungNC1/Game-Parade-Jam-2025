@@ -24,14 +24,9 @@ public class TheLittleBrotherNPC : MonoBehaviour
 
     void HandleRoutineEvent(string routineName)
     {
-        Debug.Log($"NPC is performing: {routineName}");
-
-        if (routineName == "Walk") DoMorningTask();
-        else if (routineName == "Talk") DoAfternoonTask();
-        else if (routineName == "Evening Relax") DoEveningTask();
+        if (routineName == "Walk") Walk();
     }
 
-    void DoMorningTask() { NPCMovement.enabled = true; }
-    void DoAfternoonTask() { DialogueController.instance.NewDialogueInstance("Random Text..."); }
-    void DoEveningTask() { Debug.Log("NPC is relaxing for the evening."); }
+    void Walk() { NPCMovement.enabled = true; }
+    public void StartDialouge() { DialogueController.instance.NewDialogueInstance("Random Text To Test Writing Speed Lol"); }
 }

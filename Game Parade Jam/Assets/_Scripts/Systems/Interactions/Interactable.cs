@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Events;
+
+public class Interactable : MonoBehaviour
+{
+    [SerializeField] private bool isInRange = false;
+    [SerializeField] private KeyCode interactionKey = KeyCode.F;
+    [SerializeField] private UnityEvent interactAction;
+
+    private void Update()
+    {
+        if(isInRange)
+        {
+            if(Input.GetKeyDown(interactionKey))
+            {
+                interactAction.Invoke();
+                Debug.Log("Interact sighskhgsk");
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player"))
+        {
+            Debug.Log("INRange");
+            isInRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            isInRange = false;
+        }
+    }
+}
