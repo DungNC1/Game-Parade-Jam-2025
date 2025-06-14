@@ -4,6 +4,7 @@ using System;
 public class TheLittleBrotherNPC : MonoBehaviour
 {
     public Action<string> OnTalk;
+    public GameObject cutScene;
     private NPCRoutine npcRoutine;
     private NPCMovement NPCMovement;
 
@@ -24,9 +25,9 @@ public class TheLittleBrotherNPC : MonoBehaviour
 
     void HandleRoutineEvent(string routineName)
     {
-        if (routineName == "Walk") Walk();
+        if (routineName == "Walk") BasicNPCFunctions.instance.Walk();
+        if(routineName == "Die") BasicNPCFunctions.instance.Die();
     }
 
-    void Walk() { NPCMovement.enabled = true; }
     public void StartDialouge() { DialogueController.instance.NewDialogueInstance("Random Text To Test Writing Speed Lol"); }
 }
