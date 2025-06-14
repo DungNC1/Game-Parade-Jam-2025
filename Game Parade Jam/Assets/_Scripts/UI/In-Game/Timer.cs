@@ -18,7 +18,7 @@ public class Timer : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            GameOverMenu.instance.TriggerDeath("You've ran out of time");
         }
     }
 }
