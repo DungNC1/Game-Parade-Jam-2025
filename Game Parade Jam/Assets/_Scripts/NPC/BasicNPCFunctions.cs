@@ -22,5 +22,6 @@ public class BasicNPCFunctions : MonoBehaviour
     {
         NPCMovement.enabled = false;
         cutScene.SetActive(true);
+        GameOverMenu.instance.TriggerDeath("You were too slow. The road doesn’t wait");
     }
 }
