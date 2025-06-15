@@ -7,11 +7,9 @@ public class BasicNPCFunctions : MonoBehaviour
 {
     public GameObject cutScene;
     private NPCMovement NPCMovement;
-    public static BasicNPCFunctions instance;
 
     private void Awake()
     {
-        instance = this;
         NPCMovement = GetComponent<NPCMovement>();
         NPCMovement.enabled = false;
     }

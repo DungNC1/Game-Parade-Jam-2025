@@ -10,6 +10,7 @@ public class BestFriendNPC : MonoBehaviour
     public GameObject deathDestination;
 
     private NPCRoutine npcRoutine;
+    private BasicNPCFunctions npcFunctions;
     private NPCMovement NPCMovement;
 
     private float timeAlone = 0f;
@@ -17,6 +18,7 @@ public class BestFriendNPC : MonoBehaviour
 
     void Awake()
     {
+        npcFunctions = GetComponent<BasicNPCFunctions>();
         npcRoutine = GetComponent<NPCRoutine>();
         NPCMovement = GetComponent<NPCMovement>();
         NPCMovement.enabled = false;
@@ -29,7 +31,7 @@ public class BestFriendNPC : MonoBehaviour
 
     void HandleRoutineEvent(string routineName)
     {
-        if (routineName == "Walk") BasicNPCFunctions.instance.Walk();
+        if (routineName == "Walk") npcFunctions.Walk();
     }
 
     void Update()
@@ -47,7 +49,7 @@ public class BestFriendNPC : MonoBehaviour
 
         if(transform.position == deathDestination.transform.position)
         {
-
+            npcFunctions.Die("");
         }
     }
 
