@@ -18,10 +18,9 @@ public class BasicNPCFunctions : MonoBehaviour
 
     public void Walk() { NPCMovement.enabled = true; }
 
-    public void Die()
+    public void Die(string deathMessage)
     {
         NPCMovement.enabled = false;
         cutScene.SetActive(true);
-        GameOverMenu.instance.TriggerDeath("You were too slow. The road doesn’t wait");
     }
 }

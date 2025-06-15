@@ -6,6 +6,12 @@ public class Timer : MonoBehaviour
 {
     public float timeRemaining = 600;
     public TextMeshProUGUI timerText;
+    public static Timer instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Update()
     {

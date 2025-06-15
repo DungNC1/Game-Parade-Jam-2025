@@ -26,7 +26,7 @@ public class TheLittleBrotherNPC : MonoBehaviour
     void HandleRoutineEvent(string routineName)
     {
         if (routineName == "Walk") BasicNPCFunctions.instance.Walk();
-        if(routineName == "Die") BasicNPCFunctions.instance.Die();
+        if(routineName == "Die") BasicNPCFunctions.instance.Die("You were too slow. The road doesn’t wait");
     }
 
     public void StartDialouge() { DialogueController.instance.NewDialogueInstance("Random Text To Test Writing Speed Lol"); }

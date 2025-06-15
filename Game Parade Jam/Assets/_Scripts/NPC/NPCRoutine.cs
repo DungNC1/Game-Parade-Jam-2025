@@ -10,17 +10,14 @@ public class RoutineEvent
 
 public class NPCRoutine : MonoBehaviour
 {
-    public Timer gameTimer;
     public RoutineEvent[] routineEvents;
     public Action<string> OnRoutineTriggered;
 
     void Update()
     {
-        if (gameTimer == null) return;
-
         foreach (var routine in routineEvents)
         {
-            if (Mathf.FloorToInt(gameTimer.timeRemaining) == Mathf.FloorToInt(routine.timestamp))
+            if (Mathf.FloorToInt(Timer.instance.timeRemaining) == Mathf.FloorToInt(routine.timestamp))
             {
                 TriggerRoutine(routine.eventName);
                 break;

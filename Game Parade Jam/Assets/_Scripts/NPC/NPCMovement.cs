@@ -13,6 +13,11 @@ public class NPCMovement : MonoBehaviour
     private float blockTimer = 0f;
     private bool warnedOnce = false;
 
+    public void SetTarget(GameObject target)
+    {
+        waypoints[currentWaypointIndex] = target.transform;
+    }
+
     void Update()
     {
         if (currentWaypointIndex >= waypoints.Length) return;
