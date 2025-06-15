@@ -2,11 +2,9 @@ using UnityEngine;
 
 public class FirefighterNPC : MonoBehaviour
 {
-    public float enterFireTime = 200f;
-    public float deathTime = 270f;
+    public float deathTime = 30f;
     public GameObject fireLocation;
-    public Transform idlePosition;
-    public GameObject fireHazard;
+    public GameObject fire;
     private bool hasEnteredFire = false;
     private bool hasDied = false;
     private bool fireCleared = false;
@@ -33,32 +31,20 @@ public class FirefighterNPC : MonoBehaviour
     void HandleRoutineEvent(string routineName)
     {
         if (routineName == "Walk") npcFunctions.Walk();
+        if(routineName == "WalkIntoFire") EnterFire();
     }
 
-    void Update()
+    void EnterFire()
     {
-        float loopTime = Timer.instance.timeRemaining;
-
-        if (!hasEnteredFire && loopTime >= enterFireTime && loopTime < deathTime)
-        {
-            npcMovement.SetTarget(fireLocation);
-            hasEnteredFire = true;
-        }
-
-        if (!hasDied && loopTime >= deathTime)
-        {
-            if (!fireCleared)
-            {
-                hasDied = true;
-                npcFunctions.Die("He was brave. But bravery alone doesn’t save lives. Cause: Firefighter");
-            }
-        }
+        npcMovement.SetTarget(fireLocation);
+        hasEnteredFire = true;
     }
+
 
     public void ClearFire()
     {
         fireCleared = true;
-        fireHazard.SetActive(false);
+        fire.SetActive(false);
     }
 
     public void StartDialogue()
