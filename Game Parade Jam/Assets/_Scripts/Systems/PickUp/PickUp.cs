@@ -1,19 +1,25 @@
 using UnityEngine;
 
-public enum PickupType { Extinguisher, Key, Tool }
-
 public class Pickup : MonoBehaviour
 {
-    public PickupType type;
+    public ItemData itemData;
     public float followSpeed = 5f;
     public float followDistance = 1f;
+    public KeyCode dropKey = KeyCode.G;
 
+    private static Pickup currentlyHeldItem;
     private Transform player;
     private bool isPickedUp = false;
     private LineRenderer lineRenderer;
 
     void Start()
     {
+        if (itemData == null)
+        {
+            Debug.LogError("No ItemData assigned to " + gameObject.name);
+            return;
+        }
+
         lineRenderer = gameObject.AddComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
         lineRenderer.startWidth = 0.05f;
@@ -21,6 +27,7 @@ public class Pickup : MonoBehaviour
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         lineRenderer.startColor = new Color(1, 1, 1, 0.5f);
         lineRenderer.endColor = new Color(1, 1, 1, 0.2f);
+        lineRenderer.enabled = false;
     }
 
     void Update()
@@ -33,27 +40,36 @@ public class Pickup : MonoBehaviour
 
         lineRenderer.SetPosition(0, player.position);
         lineRenderer.SetPosition(1, transform.position);
+
+        if (Input.GetKeyDown(dropKey))
+        {
+            Drop();
+        }
     }
 
     public void PickUp()
     {
-        if (isPickedUp) return;
+        if (currentlyHeldItem != null) return;
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         isPickedUp = true;
-        DialogueController.instance.NewDialogueInstance("Picked up: " + type.ToString());
+        currentlyHeldItem = this;
+        DialogueController.instance.NewDialogueInstance("You picked up: " + itemData.itemName);
+        lineRenderer.enabled = true;
 
-        switch (type)
-        {
-            case PickupType.Extinguisher:
-                PlayerInventory.instance.hasExtinguisher = true;
-                break;
-            case PickupType.Key:
-                PlayerInventory.instance.hasKey = true;
-                break;
-            case PickupType.Tool:
-                PlayerInventory.instance.hasTool = true;
-                break;
-        }
+        PlayerInventory.instance.Hold(itemData);
+    }
+
+    public void Drop()
+    {
+        if (!isPickedUp) return;
+
+        isPickedUp = false;
+        currentlyHeldItem = null;
+        player = null;
+        lineRenderer.enabled = false;
+
+        DialogueController.instance.NewDialogueInstance("You dropped: " + itemData.itemName);
+        PlayerInventory.instance.Drop();
     }
 }

@@ -12,7 +12,7 @@ public class Fire: MonoBehaviour
 
     void Update()
     {
-        if (!isCleared && Timer.instance.timeRemaining >= fireStartTime)
+        if (!isCleared && Timer.instance.timeRemaining <= fireStartTime)
         {
             gameObject.transform.Find("Visual").gameObject.SetActive(true);
         }
@@ -29,7 +29,7 @@ public class Fire: MonoBehaviour
     {
         if (isCleared) return;
 
-        if (PlayerInventory.instance.hasExtinguisher)
+        if (PlayerInventory.instance.IsHoldingExtinguisher())
         {
             isCleared = true;
             gameObject.SetActive(false);
