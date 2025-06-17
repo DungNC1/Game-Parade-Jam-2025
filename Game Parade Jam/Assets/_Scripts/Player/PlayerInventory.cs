@@ -25,6 +25,11 @@ public class PlayerInventory : MonoBehaviour
 
     public bool IsHoldingExtinguisher()
     {
-        return currentItem != null && currentItem.isExtinguisher;
+        return currentItem != null && currentItem.itemName == "FireExtinggushier";
+    }
+
+    public bool IsHoldingCandy()
+    {
+        return currentItem != null && currentItem.itemName == "Candy";
     }
 }

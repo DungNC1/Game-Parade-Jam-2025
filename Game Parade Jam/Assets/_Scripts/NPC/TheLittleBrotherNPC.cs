@@ -5,9 +5,12 @@ public class TheLittleBrotherNPC : MonoBehaviour
 {
     public Action<string> OnTalk;
     public GameObject cutScene;
+    public Transform safePosition;
     private NPCRoutine npcRoutine;
     private BasicNPCFunctions npcFunctions;
     private NPCMovement NPCMovement;
+
+    private bool isBeingLured = false;
 
     private void Awake()
     {
@@ -28,7 +31,16 @@ public class TheLittleBrotherNPC : MonoBehaviour
     void HandleRoutineEvent(string routineName)
     {
         if (routineName == "Walk") npcFunctions.Walk();
-        if(routineName == "Die") npcFunctions.Die("");
+        if(routineName == "Die" && isBeingLured == false) npcFunctions.Die("");
+    }
+
+    private void Update()
+    {
+        if(PlayerInventory.instance.IsHoldingCandy())
+        {
+            isBeingLured = true;
+            NPCMovement.SetTarget(GameObject.FindWithTag("Player"));
+        }
     }
 
     public void StartDialouge() { DialogueController.instance.NewDialogueInstance("Random Text To Test Writing Speed Lol"); }
