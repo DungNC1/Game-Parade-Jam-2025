@@ -32,4 +32,9 @@ public class PlayerInventory : MonoBehaviour
     {
         return currentItem != null && currentItem.itemName == "Candy";
     }
+
+    public bool IsHoldingMedicine()
+    {
+        return currentItem != null && currentItem.itemName == "Medicine";
+    }
 }

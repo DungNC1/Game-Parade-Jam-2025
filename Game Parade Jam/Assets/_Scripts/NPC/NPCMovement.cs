@@ -35,7 +35,7 @@ public class NPCMovement : MonoBehaviour
             {
                 if (!warnedOnce)
                 {
-                    DialogueController.instance.NewDialogueInstance("Hey, move.");
+                    DialogueController.instance.NewDialogueInstance("Hey, move!");
                     warnedOnce = true;
                     blockTimer = 0f;
                 }

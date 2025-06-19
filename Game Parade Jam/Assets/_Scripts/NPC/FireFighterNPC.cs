@@ -5,9 +5,8 @@ public class FirefighterNPC : MonoBehaviour
     public float deathTime = 30f;
     public GameObject fireLocation;
     public GameObject fire;
-    private bool hasEnteredFire = false;
-    private bool hasDied = false;
     private bool fireCleared = false;
+    private bool isSaved = false;
     private NPCMovement npcMovement;
     private NPCRoutine npcRoutine;
     private BasicNPCFunctions npcFunctions;
@@ -37,7 +36,18 @@ public class FirefighterNPC : MonoBehaviour
     void EnterFire()
     {
         npcMovement.SetTarget(fireLocation);
-        hasEnteredFire = true;
+        if (Vector2.Distance(transform.position, fireLocation.transform.position) < 0.05f)
+        {
+            if (fireCleared == false)
+            {
+                npcFunctions.Die("");
+            }
+            else
+            {
+                npcMovement.enabled = false;
+                isSaved = true;
+            }
+        }
     }
 
 
@@ -50,6 +60,12 @@ public class FirefighterNPC : MonoBehaviour
     public void StartDialogue()
     {
         float loopTime = Timer.instance.timeRemaining;
+
+        if(isSaved == true)
+        {
+            DialogueController.instance.NewDialogueInstance("Thank you for putting out the fire!");
+            return;
+        }
 
         if (loopTime < 180f)
         {
