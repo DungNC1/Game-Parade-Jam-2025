@@ -9,18 +9,35 @@ public class NPCMovement : MonoBehaviour
     public float teleportDistance = 1.5f;
     public LayerMask playerLayer;
 
+    public string walkAnimation;
+    public string idleAnimation;
+
     private int currentWaypointIndex = 0;
     private float blockTimer = 0f;
     private bool warnedOnce = false;
 
+    private Animator animator;
+
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     public void SetTarget(GameObject target)
     {
-        waypoints[currentWaypointIndex] = target.transform;
+        if (currentWaypointIndex < waypoints.Length)
+        {
+            waypoints[currentWaypointIndex] = target.transform;
+        }
     }
 
     void Update()
     {
-        if (currentWaypointIndex >= waypoints.Length) return;
+        if (currentWaypointIndex >= waypoints.Length)
+        {
+            SetAnimation(false);
+            return;
+        }
 
         Vector3 target = waypoints[currentWaypointIndex].position;
         Vector3 direction = (target - transform.position).normalized;
@@ -30,6 +47,7 @@ public class NPCMovement : MonoBehaviour
         if (hit.collider != null)
         {
             blockTimer += Time.deltaTime;
+            SetAnimation(false);
 
             if (blockTimer >= maxBlockTime)
             {
@@ -52,10 +70,26 @@ public class NPCMovement : MonoBehaviour
             blockTimer = 0f;
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, target) < 0.05f)
+        float distance = Vector2.Distance(transform.position, target);
+        Debug.Log(distance);
+        if (distance >= 4f)
         {
+            transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+            SetAnimation(true);
+        }
+        else
+        {
+
+            SetAnimation(false); 
             currentWaypointIndex++;
+        }
+    }
+
+    void SetAnimation(bool moving)
+    {
+        if (animator != null)
+        {
+            animator.Play(moving ? walkAnimation : idleAnimation);
         }
     }
 
@@ -65,6 +99,7 @@ public class NPCMovement : MonoBehaviour
         Vector3 teleportTarget = transform.position + forward.normalized * teleportDistance;
         transform.position = teleportTarget;
         blockTimer = 0f;
+        warnedOnce = false;
     }
 
     string GetRandomDialogue()
@@ -99,6 +134,4 @@ public class NPCMovement : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(start, blockCheckRadius);
     }
-
-
 }

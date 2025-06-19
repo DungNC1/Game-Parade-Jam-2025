@@ -41,7 +41,7 @@ public class BestFriendNPC : MonoBehaviour
         timeAlone += Time.deltaTime;
         hope -= decayRate * Time.deltaTime;
 
-        if (hope <= 0 || timeAlone >= deathTime)
+        if (hope <= 0 && timeAlone >= deathTime)
         {
             hasDied = true;
             NPCMovement.SetTarget(deathDestination);
