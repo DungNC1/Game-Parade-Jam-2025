@@ -37,4 +37,9 @@ public class PlayerInventory : MonoBehaviour
     {
         return currentItem != null && currentItem.itemName == "Medicine";
     }
+
+    public bool IsHoldingDiary()
+    {
+        return currentItem != null && currentItem.itemName == "Diary";
+    }
 }

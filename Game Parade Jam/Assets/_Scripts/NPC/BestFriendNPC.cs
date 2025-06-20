@@ -55,6 +55,15 @@ public class BestFriendNPC : MonoBehaviour
 
     public void StartDialouge()
     {
+        if(PlayerInventory.instance.IsHoldingDiary())
+        {
+            decayRate = 0f;
+            DialogueController.instance.NewDialogueInstance("...Thank you. I needed this more than I thought.");
+            PlayerInventory.instance.currentItem = null;
+            Destroy(GameObject.Find("FireExtingushier"));
+            return;
+        }
+
         float loopTime = Timer.instance.timeRemaining;
 
         if (loopTime < 90f)
@@ -79,4 +88,5 @@ public class BestFriendNPC : MonoBehaviour
         hope += gainPerTalk;
         if (hope > maxHope) hope = maxHope;
     }
+
 }

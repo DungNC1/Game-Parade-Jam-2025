@@ -34,6 +34,8 @@ public class Fire: MonoBehaviour
             isCleared = true;
             gameObject.SetActive(false);
             DialogueController.instance.NewDialogueInstance("You extinguished the fire.");
+            PlayerInventory.instance.currentItem = null;
+            Destroy(GameObject.Find("FireExtingushier"));
             FindObjectOfType<FirefighterNPC>().ClearFire();
         }
         else

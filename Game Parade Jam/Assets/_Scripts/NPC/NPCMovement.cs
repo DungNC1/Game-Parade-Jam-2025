@@ -83,6 +83,20 @@ public class NPCMovement : MonoBehaviour
             SetAnimation(false); 
             currentWaypointIndex++;
         }
+
+        if (target.x < transform.position.x)
+        {
+            Vector3 scale = transform.localScale;
+            scale.x = -Mathf.Abs(scale.x);
+            transform.localScale = scale;
+        }
+        else if (target.x > transform.position.x)
+        {
+            Vector3 scale = transform.localScale;
+            scale.x = Mathf.Abs(scale.x);
+            transform.localScale = scale;
+        }
+
     }
 
     void SetAnimation(bool moving)
