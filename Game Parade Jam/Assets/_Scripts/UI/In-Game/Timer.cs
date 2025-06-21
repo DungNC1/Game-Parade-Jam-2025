@@ -4,9 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
-    public float timeRemaining = 600;
+    public float timeRemaining;
     public TextMeshProUGUI timerText;
     public static Timer instance;
+    public GameObject[] npcs;
+    public float delayTime;
 
     private void Awake()
     {
@@ -26,5 +28,10 @@ public class Timer : MonoBehaviour
         {
             GameOverMenu.instance.TriggerDeath("You've ran out of time");
         }
+    }
+
+    public void ResetLoop()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
