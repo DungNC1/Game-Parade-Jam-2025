@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PregnantWoman : MonoBehaviour
 {
@@ -20,13 +21,18 @@ public class PregnantWoman : MonoBehaviour
     void HandleRoutineEvent(string routineName)
     {
         if (routineName == "Walk") npcFunctions.Walk();
-        if (routineName == "Die" && isSaved == false) npcFunctions.Die("");
+        if (routineName == "Die" && isSaved == false)
+        {
+            npcFunctions.Die("");
+            SceneManager.LoadScene("Ending");
+        }
     }
 
     void Start()
     {
             npcRoutine.OnRoutineTriggered += HandleRoutineEvent;
     }
+
 
     public void Interact()
     {

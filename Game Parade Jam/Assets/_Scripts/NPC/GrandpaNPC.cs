@@ -42,8 +42,9 @@ public class GrandpaNPC : MonoBehaviour
             DialogueController.instance.NewDialogueInstance("Thank you! You know, I'm tired of seeing people die and die again and again");
             DialogueController.instance.NewDialogueInstance("You know what I mean, don't pretend like it");
             DialogueController.instance.NewDialogueInstance("Here, take this, it might help you on your next loop");
-            GameObject.Find("Pills").SetActive(false);
+            GameObject.Find("Pill").SetActive(false);
             PlayerPrefs.SetInt("delayEvent", 1);
+            Timer.instance.ResetLoop();
         }
     }
 }

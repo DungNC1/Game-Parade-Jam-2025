@@ -4,7 +4,6 @@ using System;
 public class TheLittleBrotherNPC : MonoBehaviour
 {
     public Action<string> OnTalk;
-    public GameObject cutScene;
     public Transform safePosition;
     public GameObject deathDestination;
     private NPCRoutine npcRoutine;
@@ -37,7 +36,8 @@ public class TheLittleBrotherNPC : MonoBehaviour
 
     private void Update()
     {
-            if (transform.position == deathDestination.transform.position)
+        float distance = Vector2.Distance(transform.position, deathDestination.transform.position);
+        if (distance <= 0.5f)
             {
                 npcFunctions.Die("");
             }

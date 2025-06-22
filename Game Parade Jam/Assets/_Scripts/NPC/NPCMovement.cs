@@ -29,6 +29,20 @@ public class NPCMovement : MonoBehaviour
         {
             waypoints[currentWaypointIndex] = target.transform;
         }
+/*
+        float distance = Vector2.Distance(transform.position, target.transform.position);
+        Debug.Log(distance);
+        if (distance >= 0.5f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            SetAnimation(true);
+        }
+        else
+        {
+
+            SetAnimation(false);
+            currentWaypointIndex++;
+        }*/
     }
 
     void Update()

@@ -12,6 +12,7 @@ public class Pickup : MonoBehaviour
     private Transform player;
     private bool isPickedUp = false;
     private LineRenderer lineRenderer;
+    private bool isDisplayed = false;
 
     void Start()
     {
@@ -46,6 +47,12 @@ public class Pickup : MonoBehaviour
         {
             Drop();
         }
+
+        if(currentlyHeldItem.name == "Candy" && isDisplayed == false)
+        {
+            isDisplayed = true;
+            DialogueController.instance.NewDialogueInstance("Use the candy to lure your brother back to your house");
+        }
     }
 
     public void PickUp()
@@ -62,6 +69,7 @@ public class Pickup : MonoBehaviour
 
         PlayerInventory.instance.Hold(itemData);
     }
+
 
     public void Drop()
     {

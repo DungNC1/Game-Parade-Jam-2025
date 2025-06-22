@@ -47,7 +47,8 @@ public class BestFriendNPC : MonoBehaviour
             NPCMovement.SetTarget(deathDestination);
         }
 
-        if(transform.position == deathDestination.transform.position)
+        float distance = Vector2.Distance(transform.position, deathDestination.transform.position);
+        if (distance <= 0.5f)
         {
             npcFunctions.Die("");
         }

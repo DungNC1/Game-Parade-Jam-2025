@@ -41,6 +41,7 @@ public class FirefighterNPC : MonoBehaviour
             if (fireCleared == false)
             {
                 npcFunctions.Die("");
+                GameObject.Find("FirefighterDeath").SetActive(true);
             }
             else
             {
