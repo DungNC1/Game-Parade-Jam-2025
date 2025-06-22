@@ -6,6 +6,7 @@ public class TheLittleBrotherNPC : MonoBehaviour
     public Action<string> OnTalk;
     public GameObject cutScene;
     public Transform safePosition;
+    public GameObject deathDestination;
     private NPCRoutine npcRoutine;
     private BasicNPCFunctions npcFunctions;
     private NPCMovement NPCMovement;
@@ -31,11 +32,16 @@ public class TheLittleBrotherNPC : MonoBehaviour
     void HandleRoutineEvent(string routineName)
     {
         if (routineName == "Walk") npcFunctions.Walk();
-        if(routineName == "Die" && isBeingLured == false) npcFunctions.Die("");
+        if(routineName == "Die" && isBeingLured == false) NPCMovement.SetTarget(deathDestination);
     }
 
     private void Update()
     {
+            if (transform.position == deathDestination.transform.position)
+            {
+                npcFunctions.Die("");
+            }
+
         if(PlayerInventory.instance.IsHoldingCandy())
         {
             isBeingLured = true;

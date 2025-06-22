@@ -72,7 +72,7 @@ public class NPCMovement : MonoBehaviour
 
         float distance = Vector2.Distance(transform.position, target);
         Debug.Log(distance);
-        if (distance >= 4f)
+        if (distance >= 0.5f)
         {
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
             SetAnimation(true);

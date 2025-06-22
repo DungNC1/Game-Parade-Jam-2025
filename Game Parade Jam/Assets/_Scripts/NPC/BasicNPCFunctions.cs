@@ -19,6 +19,9 @@ public class BasicNPCFunctions : MonoBehaviour
     public void Die(string deathMessage)
     {
         NPCMovement.enabled = false;
-        cutScene.SetActive(true);
+        if (cutScene != null)
+        {
+            cutScene.SetActive(true);
+        }
     }
 }

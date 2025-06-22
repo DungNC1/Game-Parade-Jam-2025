@@ -4,6 +4,7 @@ public class PlayerInventory : MonoBehaviour
 {
     public static PlayerInventory instance;
     public ItemData currentItem;
+    public int coinCount;
 
     void Awake()
     {
