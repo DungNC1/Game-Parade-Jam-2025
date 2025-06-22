@@ -6,6 +6,7 @@ public class Pickup : MonoBehaviour
     public float followSpeed = 5f;
     public float followDistance = 1f;
     public KeyCode dropKey = KeyCode.G;
+    public AudioClip pickUpSFX;
 
     private static Pickup currentlyHeldItem;
     private Transform player;
@@ -50,6 +51,8 @@ public class Pickup : MonoBehaviour
     public void PickUp()
     {
         if (currentlyHeldItem != null) return;
+
+        AudioManager.instance.PlaySFX(pickUpSFX);
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         isPickedUp = true;

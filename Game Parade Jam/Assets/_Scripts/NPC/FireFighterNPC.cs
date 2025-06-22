@@ -30,7 +30,7 @@ public class FirefighterNPC : MonoBehaviour
     void HandleRoutineEvent(string routineName)
     {
         if (routineName == "Walk") npcFunctions.Walk();
-        if(routineName == "WalkIntoFire") EnterFire();
+        if(routineName == "Die") EnterFire();
     }
 
     void EnterFire()

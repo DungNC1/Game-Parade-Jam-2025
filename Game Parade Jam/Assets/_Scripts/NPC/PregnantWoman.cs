@@ -20,7 +20,7 @@ public class PregnantWoman : MonoBehaviour
     void HandleRoutineEvent(string routineName)
     {
         if (routineName == "Walk") npcFunctions.Walk();
-        if (routineName == "Colapse" && isSaved == false) npcFunctions.Die("");
+        if (routineName == "Die" && isSaved == false) npcFunctions.Die("");
     }
 
     void Start()

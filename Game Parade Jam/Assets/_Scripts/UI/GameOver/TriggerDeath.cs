@@ -4,6 +4,7 @@ public class TriggerDeath : MonoBehaviour
 {
     public string deathMessage;
     public float deleteDelay = 1.5f;
+    public AudioClip gameOverSFX;
 
     private void Awake()
     {
@@ -16,6 +17,7 @@ public class TriggerDeath : MonoBehaviour
         gameObject.transform.parent.GetComponent<SpriteRenderer>().enabled = false;
         gameObject.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
         yield return new WaitForSeconds(3);
+        AudioManager.instance.PlaySFX(gameOverSFX);
         GameOverMenu.instance.TriggerDeath(deathMessage);
         gameObject.transform.parent.gameObject.SetActive(false);
     }
