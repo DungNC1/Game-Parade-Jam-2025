@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartButton()
     {
+        GameObject.Find("MainMenu").SetActive(false);
         SceneManager.LoadScene(1);
     }
 

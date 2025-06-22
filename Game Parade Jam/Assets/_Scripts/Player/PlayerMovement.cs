@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -5,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     private Rigidbody2D rb;
     private Animator animator;
+    public AudioClip walkAudio;
 
     private Vector2 movement;
 
@@ -28,6 +30,11 @@ public class PlayerMovement : MonoBehaviour
             scale.x = Mathf.Sign(movement.x) * Mathf.Abs(scale.x);
             transform.localScale = scale;
         }
+    }
+
+    public void PlayWalkAudio()
+    {
+        AudioManager.instance.PlaySFX(walkAudio);
     }
 
     void FixedUpdate()

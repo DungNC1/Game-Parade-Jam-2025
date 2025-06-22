@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,7 +5,7 @@ public class Interactable : MonoBehaviour
 {
     [SerializeField] private bool isInRange = false;
     [SerializeField] private KeyCode interactionKey = KeyCode.F;
-    [SerializeField] private UnityEvent interactAction;
+    public UnityEvent interactAction;
 
     private void Update()
     {

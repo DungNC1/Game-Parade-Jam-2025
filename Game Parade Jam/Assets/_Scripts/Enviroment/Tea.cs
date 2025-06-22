@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Tea : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class Tea : MonoBehaviour
     public RectTransform perfectZone;
     public float speed = 500f;
     public bool movingRight = true;
+
+    public UnityEvent pickupEvent;
 
     private bool isBrewing = false;
 
@@ -57,6 +60,8 @@ public class Tea : MonoBehaviour
         if (barLeft >= zoneLeft && barLeft <= zoneRight)
         {
             GetComponent<Pickup>().PickUp();
+            gameObject.transform.Find("InteractArea").GetComponent<Interactable>().interactAction = pickupEvent;
+            this.enabled = false;
             DialogueController.instance.NewDialogueInstance("Tea Brewed!");
         }
         else
