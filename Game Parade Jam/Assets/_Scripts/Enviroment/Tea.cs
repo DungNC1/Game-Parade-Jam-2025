@@ -8,6 +8,7 @@ public class Tea : MonoBehaviour
     public RectTransform perfectZone;
     public float speed = 500f;
     public bool movingRight = true;
+    public AudioClip teaBrewed;
 
     public UnityEvent pickupEvent;
 
@@ -60,6 +61,7 @@ public class Tea : MonoBehaviour
         if (barLeft >= zoneLeft && barLeft <= zoneRight)
         {
             GetComponent<Pickup>().PickUp();
+            AudioManager.instance.PlaySFX(teaBrewed);
             gameObject.transform.Find("InteractArea").GetComponent<Interactable>().interactAction = pickupEvent;
             this.enabled = false;
             DialogueController.instance.NewDialogueInstance("Tea Brewed!");

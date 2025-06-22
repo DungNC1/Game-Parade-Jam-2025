@@ -45,3 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathMessage: 'You''re too slow. The road doesn''t wait. Cause: Little brother'
+  deleteDelay: 1.5
+  gameOverSFX: {fileID: 8300000, guid: e87ee951280098847a58d908a19fdfd0, type: 3}

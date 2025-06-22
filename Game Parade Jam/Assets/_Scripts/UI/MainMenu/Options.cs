@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ public class Options : MonoBehaviour
 {
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider SFXSlider;
+    public AudioClip buttonClick;
 
 
     private void Start()
@@ -28,6 +30,7 @@ public class Options : MonoBehaviour
 
     public void BackButton()
     {
+        AudioManager.instance.PlaySFX(buttonClick);
         gameObject.SetActive(false);
     }
 
